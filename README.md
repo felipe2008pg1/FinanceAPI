@@ -1,63 +1,63 @@
 # 💰 FinanceAPI
 
-API REST para gestão financeira pessoal, construída com FastAPI + MySQL.
+API REST for management finance pessoal, building with FastAPI + MySQL.
 
-## 🚀 Tecnologias
+## 🚀 Technologies
 
-- **FastAPI** — framework web moderno e de alta performance
-- **SQLAlchemy** — ORM para interação com o banco de dados
-- **MySQL** — banco de dados relacional
-- **Alembic** — migrations de banco de dados
-- **JWT** — autenticação segura com access e refresh tokens
-- **Docker** — containerização da aplicação
-- **Pytest** — testes automatizados
+- **FastAPI** — framework web modern and for performance up.
+- **SQLAlchemy** — ORM for interaction with database.
+- **MySQL** — Relacional Database;
+- **Alembic** — Database migrations.
+- **JWT** — Security autentication with access e refresh tokens.
+- **Docker** — Application containerization.
+- **Pytest** — Automated tests.
 
-## 📦 Funcionalidades
+## 📦 Features
 
-- ✅ Autenticação completa (register, login, refresh token)
-- ✅ CRUD de transações (receitas e despesas)
-- ✅ CRUD de categorias personalizadas
-- ✅ Relatório de saldo (total de receitas, despesas e saldo)
-- ✅ Relatório de gastos por categoria
-- ✅ Filtros por tipo, categoria e período
-- ✅ Documentação automática via Swagger
+- ✅ Autentication full (register, login, refresh token).
+- ✅ CRUD transactions (income and expenses).
+- ✅ CRUD for personalized categories.
+- ✅ Balance report (total income, expenses and balance).
+- ✅ Expense report by category.
+- ✅ Filters by type, category, and period.
+- ✅ Automated documentation via Swagger.
 
-## ⚙️ Como rodar localmente
+## ⚙️ How to run local
 
-### Pré-requisitos
+### Pre-requisites
 - Python 3.11+
-- MySQL rodando localmente
+- MySQL running locally
 - pip
 
-### Instalação
+### Installation
 
 ```bash
-# Clone o repositório
+# Clone the repository
 git clone https://github.com/felipe2008pg1/financeAPI.git
 cd financeAPI
 
-# Crie e ative o ambiente virtual
+# Create and active the enviroment virtual
 python -m venv venv
 venv\Scripts\activate  # Windows
 source venv/bin/activate  # Linux/Mac
 
-# Instale as dependências
+# Install dependences
 pip install -r requirements.txt
 
-# Configure as variáveis de ambiente
+# Configure as environment variables
 cp .env.example .env
-# Edite o .env com suas credenciais do MySQL
+# Edit the .env file with your MySQL credentials.
 ```
 
-### Rodando a API
+### Running API
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-Acesse: [http://localhost:8000/docs](http://localhost:8000/docs)
+Acess: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-## 🐳 Rodando com Docker
+## 🐳 Running with Docker
 
 ```bash
 docker-compose up --build
@@ -65,23 +65,23 @@ docker-compose up --build
 
 ## 📖 Endpoints
 
-| Método | Rota | Descrição |
+| Method | Route | Description |
 |--------|------|-----------|
-| POST | `/api/v1/auth/register` | Cadastro de usuário |
+| POST | `/api/v1/auth/register` | Register user |
 | POST | `/api/v1/auth/login` | Login |
 | POST | `/api/v1/auth/refresh` | Refresh token |
-| GET | `/api/v1/auth/me` | Usuário autenticado |
-| GET | `/api/v1/categories` | Listar categorias |
-| POST | `/api/v1/categories` | Criar categoria |
-| PUT | `/api/v1/categories/{id}` | Atualizar categoria |
-| DELETE | `/api/v1/categories/{id}` | Deletar categoria |
-| GET | `/api/v1/transactions` | Listar transações |
-| POST | `/api/v1/transactions` | Criar transação |
-| PUT | `/api/v1/transactions/{id}` | Atualizar transação |
-| DELETE | `/api/v1/transactions/{id}` | Deletar transação |
-| GET | `/api/v1/reports/summary` | Resumo financeiro |
-| GET | `/api/v1/reports/by-category` | Gastos por categoria |
+| GET | `/api/v1/auth/me` | User autentic |
+| GET | `/api/v1/categories` | List categories |
+| POST | `/api/v1/categories` | Create categorie |
+| PUT | `/api/v1/categories/{id}` | To update categorie |
+| DELETE | `/api/v1/categories/{id}` | Delete categorie |
+| GET | `/api/v1/transactions` | List transactions |
+| POST | `/api/v1/transactions` | Create transactions |
+| PUT | `/api/v1/transactions/{id}` | To update transactions |
+| DELETE | `/api/v1/transactions/{id}` | Deletae transaction |
+| GET | `/api/v1/reports/summary` | Financial summary |
+| GET | `/api/v1/reports/by-category` | Spending by category |
 
-## 🔐 Autenticação
+## 🔐 Autentication
 
-A API utiliza JWT. Após o login, utilize o `access_token` no header:
+The API use JWT. After login, use `access_token` in header:
