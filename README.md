@@ -84,4 +84,4 @@ docker-compose up --build
 
 ## 🔐 Autentication
 
-The API use JWT. After login, use `access_token` in header:
+The API use JWT. After login, use `access_token` in header.
