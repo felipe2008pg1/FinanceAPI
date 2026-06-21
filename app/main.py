@@ -4,7 +4,7 @@ from app.db.init_db import init_db
 
 app = FastAPI(
     title="FinanceAPI",
-    description="API REST para gestão financeira pessoal",
+    description="API REST for finance pessoal management",
     version="1.0.0"
 )
 
