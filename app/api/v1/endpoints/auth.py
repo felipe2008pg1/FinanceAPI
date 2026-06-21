@@ -27,7 +27,7 @@ def login(user_data: UserLogin, db: Session = Depends(get_db)):
 def refresh(body: RefreshTokenRequest, db: Session = Depends(get_db)):
     payload = decode_token(body.refresh_token)
     if not payload or payload.get("type") != "refresh":
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Refresh token inválido")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Refresh invalid token")
     user = get_current_user(db, body.refresh_token)
     return generate_tokens(user)
 
