@@ -40,7 +40,10 @@ def get_transaction_by_id(db: Session, transaction_id: int, user_id: int) -> Tra
         Transaction.user_id == user_id
     ).first()
     if not transaction:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Transação não encontrada")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Transaction not found"
+        )
     return transaction
 
 def update_transaction(db: Session, transaction_id: int, user_id: int, data: TransactionUpdate) -> Transaction:
@@ -56,8 +59,14 @@ def delete_transaction(db: Session, transaction_id: int, user_id: int) -> None:
     db.delete(transaction)
     db.commit()
 
-def get_summary(db: Session, user_id: int, start_date: Optional[datetime] = None, end_date: Optional[datetime] = None) -> dict:
+def get_summary(
+    db: Session,
+    user_id: int,
+    start_date: Optional[datetime] = None,
+    end_date: Optional[datetime] = None
+) -> dict:
     query = db.query(Transaction).filter(Transaction.user_id == user_id)
+
     if start_date:
         query = query.filter(Transaction.date >= start_date)
     if end_date:
@@ -73,14 +82,21 @@ def get_summary(db: Session, user_id: int, start_date: Optional[datetime] = None
         "balance": income - expense
     }
 
-def get_by_category(db: Session, user_id: int, start_date: Optional[datetime] = None, end_date: Optional[datetime] = None) -> list:
+def get_by_category(
+    db: Session,
+    user_id: int,
+    start_date: Optional[datetime] = None,
+    end_date: Optional[datetime] = None
+) -> list:
     query = db.query(
         Transaction.category_id,
         Transaction.type,
         func.sum(Transaction.amount).label("total")
     ).filter(Transaction.user_id == user_id)
+
     if start_date:
         query = query.filter(Transaction.date >= start_date)
     if end_date:
         query = query.filter(Transaction.date <= end_date)
+
     return query.group_by(Transaction.category_id, Transaction.type).all()
