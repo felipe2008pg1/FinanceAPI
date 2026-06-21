@@ -25,14 +25,14 @@ def list_categories(db: Session = Depends(get_db), current_user=Depends(get_curr
 def get_category(category_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user_dep)):
     category = db.query(Category).filter(Category.id == category_id, Category.user_id == current_user.id).first()
     if not category:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Categoria não encontrada")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Categorie not found")
     return category
 
 @router.put("/{category_id}", response_model=CategoryResponse)
 def update_category(category_id: int, data: CategoryUpdate, db: Session = Depends(get_db), current_user=Depends(get_current_user_dep)):
     category = db.query(Category).filter(Category.id == category_id, Category.user_id == current_user.id).first()
     if not category:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Categoria não encontrada")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Categorie not found")
     for field, value in data.model_dump(exclude_unset=True).items():
         setattr(category, field, value)
     db.commit()
@@ -43,6 +43,6 @@ def update_category(category_id: int, data: CategoryUpdate, db: Session = Depend
 def delete_category(category_id: int, db: Session = Depends(get_db), current_user=Depends(get_current_user_dep)):
     category = db.query(Category).filter(Category.id == category_id, Category.user_id == current_user.id).first()
     if not category:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Categoria não encontrada")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Categorie not found")
     db.delete(category)
     db.commit()
